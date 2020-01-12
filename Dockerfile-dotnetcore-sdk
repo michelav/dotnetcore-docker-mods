@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/dotnet/core/sdk AS dotnetcore-sdk
+
+ARG USR=app
+ARG GRP=app
+ARG UID=1000
+ARG GID=1000
+
+RUN groupadd -g $GID -r $GRP &&\
+    useradd -u $UID -r -g $GRP -d /home/$USR $USR
+
+USER $USR
+
+WORKDIR /home/$USR
