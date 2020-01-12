@@ -17,8 +17,7 @@ One may find `--user` option in `docker run` command a valid choice to  solve th
 problem, but if the user entered isn't registered in the container, it won't work.
 Check below:
 
-![Docker run image]
-(imgs/docker_run_01.png)
+![Docker run image](imgs/docker_run_01.png)
 
 
 
