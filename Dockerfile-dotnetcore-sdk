@@ -6,8 +6,16 @@ ARG UID=1000
 ARG GID=1000
 
 RUN groupadd -g $GID -r $GRP &&\
-    useradd -u $UID -r -g $GRP -d /home/$USR $USR
+    useradd -u $UID -r -g $GRP -d /home/$USR $USR &&\
+    mkdir -p /home/$USR/app &&\
+    chown -R $USR:$GRP /home/$USR
 
 USER $USR
 
-WORKDIR /home/$USR
+RUN dotnet tool install --tool-path /home/$USR/.dotnet/tools dotnet-aspnet-codegenerator
+ENV PATH="$PATH:/home/$USR/.dotnet/tools"
+
+# RUN mkdir /home/$USR/api &&\
+#     chown $USR:$GRP /home/$USR/api
+
+WORKDIR /home/$USR/app
